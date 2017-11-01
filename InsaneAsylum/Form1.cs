@@ -40,35 +40,53 @@ namespace InsaneAsylum
             if (e.KeyCode == Keys.C)      //left choice button press
             {
                 if (scene == 0)
-                {
-
-                }
+                { scene = 1; }
+                else if (scene == 3)
+                { scene = 4; }
+                else if (scene == 4)
+                { scene = 6; }
+                else if (scene == 6)
+                { scene = 8; }
+                else if (scene == 7)
+                { scene = 10; }
+                else if (scene == 8)
+                { scene = 11; }
+                else if (scene == 10)
+                { scene = 12; }
+                else if (scene == 16)
+                { scene = 19; }
+                else if (scene == 19)
+                { scene = 21; }
 
             }
             else if (e.KeyCode == Keys.B)  //middle choice button press
             {
-
-                if (scene == 0)
-                {
-
-                }
+                if (scene == 11)
+                { scene = 17; }
             }
             else if (e.KeyCode == Keys.M)  //right choice button press
             {
-
                 if (scene == 0)
                 {
-                    //40% chance of success
-                    chanceDoor = successChanceDoor.Next(1, 101);
+                    chanceDoor = successChanceDoor.Next(1, 101); //40% chance of success
 
-                    if (chanceDoor <= 40)
-                    {
-
-                    }
+                    if (chanceDoor <= 40) //40% chance of success
+                    { scene = 3; } //success
                     else
-                    {
-                        //scene = 2; //fail
-                    }
+                    { scene = 2; } //fail
+                }
+                else if (scene == 3)
+                { scene = 5; }  
+                else if (scene == 7)
+                { scene = 9; }
+                else if (scene == 10)
+                {
+                    chanceJump = successChanceJump.Next(1, 101); //50% chance of success
+
+                    if (chanceJump <= 50)
+                    { scene = 14; } //success
+                    else
+                    { scene = 15; } //fail
                 }
             }
 
