@@ -28,7 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.outputLabel1 = new System.Windows.Forms.Label();
+            this.sceneTester = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // outputLabel1
+            // 
+            this.outputLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.outputLabel1.Font = new System.Drawing.Font("Rockwell Condensed", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputLabel1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.outputLabel1.Location = new System.Drawing.Point(201, 18);
+            this.outputLabel1.Name = "outputLabel1";
+            this.outputLabel1.Size = new System.Drawing.Size(961, 140);
+            this.outputLabel1.TabIndex = 0;
+            this.outputLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // sceneTester
+            // 
+            this.sceneTester.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sceneTester.ForeColor = System.Drawing.Color.LimeGreen;
+            this.sceneTester.Location = new System.Drawing.Point(1168, 18);
+            this.sceneTester.Name = "sceneTester";
+            this.sceneTester.Size = new System.Drawing.Size(100, 23);
+            this.sceneTester.TabIndex = 1;
+            this.sceneTester.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -36,14 +59,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.sceneTester);
+            this.Controls.Add(this.outputLabel1);
             this.Name = "Form1";
             this.Text = "Can You Escape?";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label outputLabel1;
+        private System.Windows.Forms.Label sceneTester;
     }
 }
 
