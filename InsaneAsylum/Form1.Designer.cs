@@ -31,6 +31,9 @@
             this.outputLabel1 = new System.Windows.Forms.Label();
             this.sceneTester = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.cLabel = new System.Windows.Forms.Label();
+            this.bLabel = new System.Windows.Forms.Label();
+            this.mLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // outputLabel1
@@ -65,12 +68,45 @@
             this.label1.Text = "Press C for 1st choice, B for middle (if 3 choices), and M for last.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // cLabel
+            // 
+            this.cLabel.Font = new System.Drawing.Font("Rockwell Condensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cLabel.Location = new System.Drawing.Point(128, 619);
+            this.cLabel.Name = "cLabel";
+            this.cLabel.Size = new System.Drawing.Size(322, 62);
+            this.cLabel.TabIndex = 3;
+            this.cLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bLabel
+            // 
+            this.bLabel.Font = new System.Drawing.Font("Rockwell Condensed", 21.75F);
+            this.bLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.bLabel.Location = new System.Drawing.Point(544, 619);
+            this.bLabel.Name = "bLabel";
+            this.bLabel.Size = new System.Drawing.Size(322, 62);
+            this.bLabel.TabIndex = 4;
+            this.bLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mLabel
+            // 
+            this.mLabel.Font = new System.Drawing.Font("Rockwell Condensed", 21.75F);
+            this.mLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.mLabel.Location = new System.Drawing.Point(975, 619);
+            this.mLabel.Name = "mLabel";
+            this.mLabel.Size = new System.Drawing.Size(293, 62);
+            this.mLabel.TabIndex = 5;
+            this.mLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.mLabel);
+            this.Controls.Add(this.bLabel);
+            this.Controls.Add(this.cLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sceneTester);
             this.Controls.Add(this.outputLabel1);
@@ -87,6 +123,9 @@
         private System.Windows.Forms.Label outputLabel1;
         private System.Windows.Forms.Label sceneTester;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label cLabel;
+        private System.Windows.Forms.Label bLabel;
+        private System.Windows.Forms.Label mLabel;
     }
 }
 

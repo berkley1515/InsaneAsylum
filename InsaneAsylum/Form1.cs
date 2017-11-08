@@ -16,6 +16,7 @@ namespace InsaneAsylum
         //globals
         bool successDoor;
         bool successJump;
+        bool restartCheck = false;
         int scene = 0; //int for changing scenes when button pressed
 
         // random number generator
@@ -29,7 +30,6 @@ namespace InsaneAsylum
         {
             InitializeComponent();
 
-          //  outputLabel1.Refresh();
 
             sceneTester.Text = Convert.ToString(scene);
             sceneTester.Refresh();
@@ -70,9 +70,15 @@ namespace InsaneAsylum
             }
             else if (e.KeyCode == Keys.B)  //middle choice button press
             {
-                if (scene == 11)
+                if (scene == 11) //scene that has 3 choices
                 { scene = 17; }
-                sceneTester.Text = Convert.ToString(scene);
+                
+                else if (scene >= 1 && scene <= 10 || scene >= 12 && scene <= 22) 
+                { scene = 0;
+                    restartCheck = true;
+                }
+
+            sceneTester.Text = Convert.ToString(scene);
             }
             else if (e.KeyCode == Keys.M)  //right choice button press
             {
@@ -92,33 +98,37 @@ namespace InsaneAsylum
                 else if (scene == 7)
                 { scene = 9; }
                 else if (scene == 10)
-                {
-                    chanceJump = successChanceJump.Next(1, 101); //50% chance of success
-
+                { chanceJump = successChanceJump.Next(1, 101); //50% chance of success
                     if (chanceJump <= 50)
                     { scene = 14; } //success
                     else
                     { scene = 15; } //fail
                 }
-                sceneTester.Text = Convert.ToString(scene);
+                sceneTester.Text = Convert.ToString(scene); //for scene tester
             }
 
             switch (scene)
             {
                 case 0: 
-
+                    if (restartCheck)
+                    {
+                        outputLabel1.Text = "Do you look around the room for objects, or just try to open the door?"; //output
+                    }
 
                     break;
                 case 1:
-                    outputLabel1.Text = "You find a metal object and quietly pry the door open...\nPress Space To Continue..."; //output
+                    outputLabel1.Text = "You find a metal object and quietly pry the door open..."; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     //hiding
-
+                        
                     successDoor = false;
                     outputLabel1.Refresh();
                     Thread.Sleep(3000);//sleeping
                     scene = 3; //switching scenes
+                    outputLabel1.Text = "You see stairs and an exit door. Which do you choose? "; //output
+                    cLabel.Text = "Stairs";
+                    mLabel.Text = "Exit Door";
                     sceneTester.Text = Convert.ToString(scene);
 
                     break;
@@ -136,6 +146,8 @@ namespace InsaneAsylum
                         outputLabel1.Text = "The door was unlocked.\nYou see stairs and a exit door. Which do you choose? "; //output
                         outputLabel1.Refresh(); //refreshing
                         sceneTester.Refresh();
+                        cLabel.Text = "Stairs";
+                        mLabel.Text = "Exit Door";
                     }
                     else if (successDoor == false)
                     {
@@ -143,6 +155,8 @@ namespace InsaneAsylum
                         outputLabel1.Text = "You see stairs and an exit door. Which do you choose? "; //output
                         outputLabel1.Refresh(); //refreshing
                         sceneTester.Refresh();
+                        cLabel.Text = "Stairs";
+                        mLabel.Text = "Exit Door";
                     }
 
                     break;
@@ -150,6 +164,8 @@ namespace InsaneAsylum
                     outputLabel1.Text = "The stairs go down and up.\nDo you go Down or Up?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Go down the stairs";
+                    mLabel.Text = "Go up the stairs";
 
                     break;
                 case 5: //fail scene
@@ -162,18 +178,24 @@ namespace InsaneAsylum
                     outputLabel1.Text = "You come to a hallway and hear a women screaming.\nDo you investigate or go back upstairs?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Investigate the sound";
+                    mLabel.Text = "Go back upstairs";
 
                     break;
                 case 7:
                     outputLabel1.Text = "You come to a hallway. Left or Right?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Go left";
+                    mLabel.Text = "Go right";
 
                     break;
                 case 8:
                     outputLabel1.Text = "You see the woman tied up. Still screaming for help.\nDo you untie the woman or go back upstairs?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Untie the woman";
+                    mLabel.Text = "Go back upstairs";
 
                     break;
                 case 9: //fail scene
@@ -186,12 +208,17 @@ namespace InsaneAsylum
                     outputLabel1.Text = "You see a open window. Do you jump?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "No, I don't like heights!";
+                    mLabel.Text = "Yeah, I'm a ninja!";
 
                     break;
                 case 11:
                     outputLabel1.Text = "As you untie the woman, you hear someone coming down the stairs.\nDo you hide alone, hide with the woman, or try to tackle the guard?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Hide alone";
+                    bLabel.Text = "Finish untying and hide\nwith the woman";
+                    mLabel.Text = "Try to tackle the guard";
 
                     break;
                 case 12://fail scene
@@ -206,6 +233,7 @@ namespace InsaneAsylum
                     outputLabel1.Text = "You jump down and roll to break your fall.\nYou Escaped!\nYou Win!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //play clip of my inner ninja song
 
                     break;
                 case 15://Fail scene
@@ -218,6 +246,8 @@ namespace InsaneAsylum
                     outputLabel1.Text = "The guard stops right infront of you facing the woman.\nDo you attack the guard or stay hidden?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Attack the guard";
+                    mLabel.Text = "Stay hidden";
 
                     break;
                 case 17: //fail scene
@@ -236,6 +266,8 @@ namespace InsaneAsylum
                     outputLabel1.Text = "You knock out the guard, take his keycard, and finish untying the woman.\nDo you go back to the exit door near your room,\nor find another exit?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    cLabel.Text = "Go back to the exit door upstairs";
+                    mLabel.Text = "Find another exit";
 
                     break;
                 case 20://fail scene
@@ -256,7 +288,7 @@ namespace InsaneAsylum
                     sceneTester.Refresh();
 
                     break;
-                case 23: //extra
+                case 23: //extra just incase
                      
                     break;
                 default:
