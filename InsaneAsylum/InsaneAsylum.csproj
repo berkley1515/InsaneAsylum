@@ -107,5 +107,14 @@
   <ItemGroup>
     <None Include="Resources\stock-vector-keyhole-tree-concept-illustration-of-%281%29.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ta Da-SoundBible.com-1884170640.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Intruder Alert-SoundBible.com-867759995.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outside.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

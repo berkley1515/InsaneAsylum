@@ -1,4 +1,9 @@
-﻿using System;
+﻿///Berkley Fair & Julia scholz? (last name not correct?)
+///November 8th 2017
+///Text adventure game about escaping an insane asylum 
+///I have done my best to "fool-proof" with bad user input (only 1 scene that it breaks **(next line)**
+/// (when switching from 1 to 3 it alows the user to input buttons which would skip scene 3))
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,17 +39,20 @@ namespace InsaneAsylum
         SoundPlayer screamPlayer;
         SoundPlayer funnyscreamPlayer;
         SoundPlayer footstepsPlayer;
+        SoundPlayer winPlayer;
+        SoundPlayer alarmPlayer;
+
 
         public Form1()
         {
             InitializeComponent();
-            
-            sceneTester.Text = Convert.ToString(scene);
+           //i dont know why this is still erroring      -->
+            sceneTester.Text = Convert.ToString(scene);  // ^^
             sceneTester.Refresh();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            sceneTester.Enabled = false;
             left.Visible = false; middle.Visible = false; right.Visible = false;
             //sounds
             creepyPlayer = new SoundPlayer(Properties.Resources.creepy);
@@ -54,6 +62,8 @@ namespace InsaneAsylum
             screamPlayer = new SoundPlayer(Properties.Resources.scream);
             funnyscreamPlayer = new SoundPlayer(Properties.Resources.funnyscream);
             footstepsPlayer = new SoundPlayer(Properties.Resources.footsteps);
+            winPlayer = new SoundPlayer(Properties.Resources.win);
+            alarmPlayer = new SoundPlayer(Properties.Resources.alarm);
 
 
             // start  and loading screen
@@ -180,13 +190,15 @@ namespace InsaneAsylum
                 case 2: //fail scene
                     resartLabel.Visible = true;
                     creepyPlayer.Stop();
-                    deathPlayer.Play();
                     outputLabel1.Text = "The door was locked and a guard heard you trying to escape...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh(); //tesing
                     //hiding
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
+                    this.Refresh();
+                    alarmPlayer.PlaySync();
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 3:
@@ -222,7 +234,7 @@ namespace InsaneAsylum
                     resartLabel.Visible = true;
                     creepyPlayer.Stop();
                     deathPlayer.Play();
-                    outputLabel1.Text = "Door is locked and the alarm goes off...\nYou Got Caught!"; //output
+                    outputLabel1.Text = "The door is locked and the alarm goes off...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     //hiding
@@ -231,11 +243,15 @@ namespace InsaneAsylum
 
                     break;
                 case 6:
+                    creepyPlayer.Stop();
                     outputLabel1.Text = "You come to a hallway and hear a women screaming.\nDo you investigate or go back upstairs?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     cLabel.Text = "Investigate the sound";
                     mLabel.Text = "Go back upstairs";
+                    this.Refresh();
+                    screamPlayer.PlaySync();
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 7:
