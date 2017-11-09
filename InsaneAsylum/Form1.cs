@@ -197,7 +197,7 @@ namespace InsaneAsylum
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
                     this.Refresh();
-                    alarmPlayer.PlaySync();
+                    deathPlayer.PlaySync();
                     creepyPlayer.PlayLooping();
 
                     break;
@@ -233,13 +233,15 @@ namespace InsaneAsylum
                 case 5: //fail scene
                     resartLabel.Visible = true;
                     creepyPlayer.Stop();
-                    deathPlayer.Play();
                     outputLabel1.Text = "The door is locked and the alarm goes off...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     //hiding
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
+                    this.Refresh();
+                    alarmPlayer.PlaySync();
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 6:
