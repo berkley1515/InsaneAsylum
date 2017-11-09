@@ -28,12 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.outputLabel1 = new System.Windows.Forms.Label();
             this.sceneTester = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.cLabel = new System.Windows.Forms.Label();
             this.bLabel = new System.Windows.Forms.Label();
             this.mLabel = new System.Windows.Forms.Label();
+            this.right = new System.Windows.Forms.PictureBox();
+            this.middle = new System.Windows.Forms.PictureBox();
+            this.left = new System.Windows.Forms.PictureBox();
+            this.resartLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.right)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.middle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.left)).BeginInit();
             this.SuspendLayout();
             // 
             // outputLabel1
@@ -57,22 +64,11 @@
             this.sceneTester.TabIndex = 1;
             this.sceneTester.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Rockwell Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(859, 681);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(479, 39);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Press C for 1st choice, B for middle (if 3 choices), and M for last.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cLabel
             // 
             this.cLabel.Font = new System.Drawing.Font("Rockwell Condensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.cLabel.Location = new System.Drawing.Point(128, 619);
+            this.cLabel.Location = new System.Drawing.Point(121, 619);
             this.cLabel.Name = "cLabel";
             this.cLabel.Size = new System.Drawing.Size(322, 62);
             this.cLabel.TabIndex = 3;
@@ -92,11 +88,52 @@
             // 
             this.mLabel.Font = new System.Drawing.Font("Rockwell Condensed", 21.75F);
             this.mLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.mLabel.Location = new System.Drawing.Point(975, 619);
+            this.mLabel.Location = new System.Drawing.Point(983, 619);
             this.mLabel.Name = "mLabel";
-            this.mLabel.Size = new System.Drawing.Size(293, 62);
+            this.mLabel.Size = new System.Drawing.Size(328, 62);
             this.mLabel.TabIndex = 5;
             this.mLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // right
+            // 
+            this.right.BackgroundImage = global::InsaneAsylum.Properties.Resources.right;
+            this.right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.right.Location = new System.Drawing.Point(874, 609);
+            this.right.Name = "right";
+            this.right.Size = new System.Drawing.Size(103, 89);
+            this.right.TabIndex = 8;
+            this.right.TabStop = false;
+            // 
+            // middle
+            // 
+            this.middle.BackgroundImage = global::InsaneAsylum.Properties.Resources.middle;
+            this.middle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.middle.Location = new System.Drawing.Point(449, 609);
+            this.middle.Name = "middle";
+            this.middle.Size = new System.Drawing.Size(103, 89);
+            this.middle.TabIndex = 7;
+            this.middle.TabStop = false;
+            // 
+            // left
+            // 
+            this.left.BackgroundImage = global::InsaneAsylum.Properties.Resources.left;
+            this.left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.left.Location = new System.Drawing.Point(12, 609);
+            this.left.Name = "left";
+            this.left.Size = new System.Drawing.Size(103, 89);
+            this.left.TabIndex = 6;
+            this.left.TabStop = false;
+            // 
+            // resartLabel
+            // 
+            this.resartLabel.Font = new System.Drawing.Font("Rockwell Condensed", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resartLabel.ForeColor = System.Drawing.Color.White;
+            this.resartLabel.Location = new System.Drawing.Point(561, 270);
+            this.resartLabel.Name = "resartLabel";
+            this.resartLabel.Size = new System.Drawing.Size(305, 53);
+            this.resartLabel.TabIndex = 9;
+            this.resartLabel.Text = "Press B to restart";
+            this.resartLabel.Visible = false;
             // 
             // Form1
             // 
@@ -104,16 +141,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.resartLabel);
+            this.Controls.Add(this.right);
+            this.Controls.Add(this.middle);
+            this.Controls.Add(this.left);
             this.Controls.Add(this.mLabel);
             this.Controls.Add(this.bLabel);
             this.Controls.Add(this.cLabel);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.sceneTester);
             this.Controls.Add(this.outputLabel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Can You Escape?";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.right)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.middle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.left)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -122,10 +166,13 @@
 
         private System.Windows.Forms.Label outputLabel1;
         private System.Windows.Forms.Label sceneTester;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label cLabel;
         private System.Windows.Forms.Label bLabel;
         private System.Windows.Forms.Label mLabel;
+        private System.Windows.Forms.PictureBox left;
+        private System.Windows.Forms.PictureBox middle;
+        private System.Windows.Forms.PictureBox right;
+        private System.Windows.Forms.Label resartLabel;
     }
 }
 

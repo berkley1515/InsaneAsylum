@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
+using System.Media;
 
 namespace InsaneAsylum
 {
     public partial class Form1 : Form
     {
         //globals
+        
         bool successDoor;
         bool successJump;
         bool restartCheck = false;
@@ -24,19 +27,42 @@ namespace InsaneAsylum
         int chanceDoor;
 
         Random successChanceJump = new Random();
-        int chanceJump; 
+        int chanceJump;
+
+        SoundPlayer creepyPlayer;
+        SoundPlayer deathPlayer;
+        SoundPlayer screamPlayer;
+        SoundPlayer funnyscreamPlayer;
+        SoundPlayer footstepsPlayer;
 
         public Form1()
         {
             InitializeComponent();
-
-
+            
             sceneTester.Text = Convert.ToString(scene);
             sceneTester.Refresh();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            // make loading screen
+           
+            left.Visible = false; middle.Visible = false; right.Visible = false;
+            //sounds
+            creepyPlayer = new SoundPlayer(Properties.Resources.creepy);
+            creepyPlayer.PlayLooping();
+            //sound players
+            deathPlayer = new SoundPlayer(Properties.Resources.death);
+            screamPlayer = new SoundPlayer(Properties.Resources.scream);
+            funnyscreamPlayer = new SoundPlayer(Properties.Resources.funnyscream);
+            footstepsPlayer = new SoundPlayer(Properties.Resources.footsteps);
+
+
+            // start  and loading screen
+
+            left.Visible = true; middle.Visible = false; right.Visible = true;
+            outputLabel1.Text = "Do you look around the room for objects, or just try to open the door?"; //output
+            cLabel.Text = "Look around the room";                            //this is temperary until i make start and fake loading screen
+            mLabel.Text = "Try to open door the easy way";
+            bLabel.Text = null;
 
         }
 
@@ -94,9 +120,15 @@ namespace InsaneAsylum
                     { scene = 2; } //fail
                 }
                 else if (scene == 3)
-                { scene = 5; }  
+                { scene = 5; }
+                else if (scene == 4)
+                { scene = 7; }
+                else if (scene == 6)
+                { scene = 7; }
                 else if (scene == 7)
                 { scene = 9; }
+                else if (scene == 8)
+                { scene = 7; }
                 else if (scene == 10)
                 { chanceJump = successChanceJump.Next(1, 101); //50% chance of success
                     if (chanceJump <= 50)
@@ -104,6 +136,8 @@ namespace InsaneAsylum
                     else
                     { scene = 15; } //fail
                 }
+                else if (scene == 11)
+                { scene = 18; }
                 sceneTester.Text = Convert.ToString(scene); //for scene tester
             }
 
@@ -112,20 +146,31 @@ namespace InsaneAsylum
                 case 0: 
                     if (restartCheck)
                     {
+                        left.Visible = true; middle.Visible = false; right.Visible = true;
+                        resartLabel.Visible = false;
+                        creepyPlayer.PlayLooping();
                         outputLabel1.Text = "Do you look around the room for objects, or just try to open the door?"; //output
+                        cLabel.Text = "Look around the room";
+                        mLabel.Text = "Try to open door the easy way";
+                        bLabel.Text = null;
                     }
 
                     break;
                 case 1:
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
                     outputLabel1.Text = "You find a metal object and quietly pry the door open..."; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     //hiding
-                        
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    this.Refresh();
+
                     successDoor = false;
                     outputLabel1.Refresh();
-                    Thread.Sleep(3000);//sleeping
+                    Thread.Sleep(2000);//sleeping
                     scene = 3; //switching scenes
+                    left.Visible = true; middle.Visible = false; right.Visible = true;
+                    //sounds
                     outputLabel1.Text = "You see stairs and an exit door. Which do you choose? "; //output
                     cLabel.Text = "Stairs";
                     mLabel.Text = "Exit Door";
@@ -133,11 +178,16 @@ namespace InsaneAsylum
 
                     break;
                 case 2: //fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "The door was locked and a guard heard you trying to escape...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh(); //tesing
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
-                   
                     break;
                 case 3:
 
@@ -161,7 +211,7 @@ namespace InsaneAsylum
 
                     break;
                 case 4:
-                    outputLabel1.Text = "The stairs go down and up.\nDo you go Down or Up?"; //output
+                    outputLabel1.Text = "The stairs go both down and up.\nDo you go Down, or Up?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     cLabel.Text = "Go down the stairs";
@@ -169,9 +219,15 @@ namespace InsaneAsylum
 
                     break;
                 case 5: //fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "Door is locked and the alarm goes off...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 6:
@@ -199,9 +255,15 @@ namespace InsaneAsylum
 
                     break;
                 case 9: //fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "There was a guard around the corner...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 10:
@@ -219,27 +281,47 @@ namespace InsaneAsylum
                     cLabel.Text = "Hide alone";
                     bLabel.Text = "Finish untying and hide\nwith the woman";
                     mLabel.Text = "Try to tackle the guard";
+                    footstepsPlayer.PlaySync();
+
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 12://fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "A gaurd sees you...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 13://emtpy (oops)  
                     break;
                 case 14://WIN SCENE
+                    resartLabel.Visible = true;
                     outputLabel1.Text = "You jump down and roll to break your fall.\nYou Escaped!\nYou Win!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
                     //play clip of my inner ninja song
 
                     break;
                 case 15://Fail scene
+                    resartLabel.Visible = true;
                     outputLabel1.Text = "You slip off the roof and land on your neck.\nYou Died!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
+                    this.Refresh();
+                    funnyscreamPlayer.PlaySync();
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 16:
@@ -248,18 +330,31 @@ namespace InsaneAsylum
                     sceneTester.Refresh();
                     cLabel.Text = "Attack the guard";
                     mLabel.Text = "Stay hidden";
+                    bLabel.Text = null;
 
                     break;
                 case 17: //fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "The guard saw you trying to hide with the woman...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 18: //fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "You miss the guard and hit your head on the wall...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 19:
@@ -271,21 +366,37 @@ namespace InsaneAsylum
 
                     break;
                 case 20://fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "The guard turns around and sees you...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
-                case 21:
+                case 21: //WIN SCENE
+                    resartLabel.Visible = true;
                     outputLabel1.Text = "You make it back to the exit door with the woman, and the keycard works!\nYou Escaped!\nYou Win!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 22: //fail scene
+                    resartLabel.Visible = true;
+                    creepyPlayer.Stop();
+                    deathPlayer.Play();
                     outputLabel1.Text = "A guard sees you...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
+                    //hiding
+                    cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
+                    left.Visible = false; middle.Visible = false; right.Visible = false;
 
                     break;
                 case 23: //extra just incase

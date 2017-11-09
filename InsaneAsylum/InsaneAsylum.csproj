@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Windows\Media.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -64,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -77,6 +79,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\middle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MacLeod_-_This_House.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Games_Death_Sound_Effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Woman_Screaming.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The_-_The_Wilhelm_scream_sound_effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Footsteps_On_Stairs_Sound_Effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stock-vector-keyhole-tree-concept-illustration-of-%281%29.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
