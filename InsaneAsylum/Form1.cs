@@ -326,7 +326,9 @@ namespace InsaneAsylum
                     //hiding
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
-                    //play clip of my inner ninja song
+                    this.Refresh();
+                    winPlayer.PlaySync();
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 15://Fail scene
