@@ -21,9 +21,7 @@ namespace InsaneAsylum
     public partial class Form1 : Form
     {
         //globals
-        
         bool successDoor;
-        bool successJump;
         bool restartCheck = false;
         int scene = 0; //int for changing scenes when button pressed
 
@@ -253,6 +251,7 @@ namespace InsaneAsylum
                     mLabel.Text = "Go back upstairs";
                     this.Refresh();
                     screamPlayer.PlaySync();
+                    
                     creepyPlayer.PlayLooping();
 
                     break;
