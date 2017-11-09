@@ -54,10 +54,9 @@ namespace InsaneAsylum
         {
             sceneTester.Enabled = false;
             left.Visible = false; middle.Visible = false; right.Visible = false;
-            //sounds
-            creepyPlayer = new SoundPlayer(Properties.Resources.creepy);
-            creepyPlayer.PlayLooping();
+
             //sound players
+            creepyPlayer = new SoundPlayer(Properties.Resources.creepy);
             deathPlayer = new SoundPlayer(Properties.Resources.death);
             screamPlayer = new SoundPlayer(Properties.Resources.scream);
             funnyscreamPlayer = new SoundPlayer(Properties.Resources.funnyscream);
@@ -65,8 +64,9 @@ namespace InsaneAsylum
             winPlayer = new SoundPlayer(Properties.Resources.win);
             alarmPlayer = new SoundPlayer(Properties.Resources.alarm);
 
-
             // start  and loading screen
+            creepyPlayer.PlayLooping();//background music
+
 
             left.Visible = true; middle.Visible = false; right.Visible = true;
             outputLabel1.Text = "Do you look around the room for objects, or just try to open the door?"; //output
@@ -419,13 +419,16 @@ namespace InsaneAsylum
                 case 22: //fail scene
                     resartLabel.Visible = true;
                     creepyPlayer.Stop();
-                    deathPlayer.Play();
                     outputLabel1.Text = "A guard sees you...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     //hiding
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
+                    this.Refresh();
+                    winPlayer.PlaySync();
+
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 23: //extra just incase
