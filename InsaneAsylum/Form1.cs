@@ -293,12 +293,15 @@ namespace InsaneAsylum
 
                     break;
                 case 11:
+
                     outputLabel1.Text = "As you untie the woman, you hear someone coming down the stairs.\nDo you hide alone, hide with the woman, or try to tackle the guard?"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     cLabel.Text = "Hide alone";
                     bLabel.Text = "Finish untying and hide\nwith the woman";
                     mLabel.Text = "Try to tackle the guard";
+                    middle.Visible = true;
+                    this.Refresh();
                     footstepsPlayer.PlaySync();
 
                     creepyPlayer.PlayLooping();
@@ -356,13 +359,15 @@ namespace InsaneAsylum
                 case 17: //fail scene
                     resartLabel.Visible = true;
                     creepyPlayer.Stop();
-                    deathPlayer.Play();
+                    
                     outputLabel1.Text = "The guard saw you trying to hide with the woman...\nYou Got Caught!"; //output
                     outputLabel1.Refresh(); //refreshing
                     sceneTester.Refresh();
                     //hiding
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
+                    this.Refresh();
+                    deathPlayer.PlaySync();
 
                     break;
                 case 18: //fail scene
@@ -405,6 +410,10 @@ namespace InsaneAsylum
                     //hiding
                     cLabel.Text = null; mLabel.Text = null; bLabel.Text = null;
                     left.Visible = false; middle.Visible = false; right.Visible = false;
+                    this.Refresh();
+                    winPlayer.PlaySync();
+
+                    creepyPlayer.PlayLooping();
 
                     break;
                 case 22: //fail scene
